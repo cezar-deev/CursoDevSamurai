@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=scrip, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+
+        var n1 = Number(prompt("Número 1"))
+        var n2 = Number(prompt("Número 2"))
+        var op = prompt("Operacao")
+
+        function soma(a, b) {
+            // pode inserir outros codigos aqui    
+            return a + b 
+        };
+
+        function subtracao(a, b) {
+            // pode inserir outros codigos aqui    
+            return a - b 
+        };
+
+
+        var resultado
+
+        if (op == "+") {
+            resultado = soma(n1, n2);
+        } else if (op == "-") {
+            resultado = subtracao(n1, n2);
+        }
+
+        alert(resultado)
+    </script>
+</body>
+</html>

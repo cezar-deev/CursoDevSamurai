@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo Ping-Pong</title>
+    <style>
+        *{
+            overflow: hidden;
+            margin: 0;    
+            padding: 0;
+        }
+
+    </style>
+
+</head>
+<body>
+    <canvas></canvas>
+    <script>
+        const canvasE1 = document.querySelector("canvas"),
+              canvasCtx = canvasE1.getContext("2d")
+
+        const lineWidth = 15;
+
+        function setup() {
+            /*canvasE1.width = window.innerWidth
+            canvasCtx.width = window.innerWidth
+            canvasE1.height = window.innerHeight
+            canvasCtx.height = window.innerHeight*/
+
+            // Desenha o campo
+            canvasE1.width = canvasCtx.width = window.innerWidth
+            canvasE1.height = canvasCtx.height = window.innerHeight    
+        };
+
+        function draw() {
+            // Desenha o campo
+            canvasCtx.fillStyle = "#286047"
+            canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight)
+
+            // desenha a linha central
+            canvasCtx.fillStyle = "#ffffff"
+            canvasCtx.fillRect(
+                window.innerWidth/2 - lineWidth/2,
+                0,
+                lineWidth,
+                window.innerHeight
+            )
+
+            // Desenha a raquete esquerda
+            canvasCtx.fillRect(10, 300, lineWidth, 200)
+
+            // Desenha a raquete direita
+            canvasCtx.fillRect(window.innerWidth-lineWidth-10, 300, lineWidth, 200)
+
+
+        };
+
+        setup();
+        draw();
+
+    </script>
+</body>
+</html>
