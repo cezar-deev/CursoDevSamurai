@@ -52,7 +52,21 @@
             canvasCtx.fillRect(10, 300, lineWidth, 200)
 
             // Desenha a raquete direita
-            canvasCtx.fillRect(window.innerWidth-lineWidth-10, 300, lineWidth, 200)
+            canvasCtx.fillRect(window.innerWidth-lineWidth-10,
+            300,
+            lineWidth,
+            200)
+
+            // desnhar a bolinha
+            canvasCtx.beginPath()
+            //           ( x  , y , Raio (inicio), Arco(fim) ,  sentido ant-horario )
+            canvasCtx.arc(500,300, 20, 2 * Math.PI, false)
+            canvasCtx.fill()
+
+            // Desenhar o Placar
+            canvasCtx.font = "bold 72px Arial"
+            canvasCtx.textAlign = "center"
+            canvasCtx
 
 
         };
