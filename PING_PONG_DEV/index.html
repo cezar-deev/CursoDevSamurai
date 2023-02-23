@@ -20,55 +20,99 @@
     <script>
         const canvasE1 = document.querySelector("canvas"),
               canvasCtx = canvasE1.getContext("2d")
+              gapX = 10
 
         const lineWidth = 15;
 
-        function setup() {
-            /*canvasE1.width = window.innerWidth
-            canvasCtx.width = window.innerWidth
-            canvasE1.height = window.innerHeight
-            canvasCtx.height = window.innerHeight*/
+        // Objeto Campo
+        const field = {            
+            w: window.innerWidth,  // Propriedade largura 
+            h: window.innerHeight, // Propriedade Altura
+            draw : function () {   // Metodo que desenha o campo
+                canvasCtx.fillStyle = "#286047"
+                canvasCtx.fillRect(0, 0, this.w, this.h)
+            },
+        }
 
-            // Desenha o campo
-            canvasE1.width = canvasCtx.width = window.innerWidth
-            canvasE1.height = canvasCtx.height = window.innerHeight    
+        // Objeto Linha
+        const line = {
+            w: 15,
+            h: field.h,
+            draw : function () { // Metodo que desenha a linha central
+                canvasCtx.fillStyle = "#ffffff"
+                canvasCtx.fillRect( field.w / 2 - this.w / 2, 0, this.w, this.h)
+                
+            },
+        }
+
+        // Objeto Raquete Esquerda
+        const leftPaddle = {
+            x:gapX,              // Propriedade x(largura) da corrdenada no campo
+            y: 100,              // Propriedade y(altura) da corrdenada no campo
+            w:line.w,            // Propriedade Largura da rquete
+            h: 200,              // Propriedade Altura da rquete
+            draw: function () {  // Metodo que desenha a raquete
+                canvasCtx.fillStyle = "#ffffff"
+                canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+            }
+        }
+
+        // Objeto Raquete Direita
+        const rigthPaddle = {
+            x: field.w - line.w - gapX,     // Propriedade x(largura) da coordenada no campo
+            y: 300,                         // Propriedade y(altura) da coordenada no campo
+            w: line.w,                      // Propriedade largura da rquete
+            h: 200,                         // Propriedade altura da rquete
+            draw: function () {             // Metodo que desenha a raquete
+                canvasCtx.fillStyle = "#ffffff"         
+                canvasCtx.fillRect( this.x , this.y, this.w, this.h)
+            }
+        }
+
+        // Objeto Placar 
+        const score = {
+            human: 1,   
+            computer: 3,    
+            draw: function () {
+                canvasCtx.font = "bold 72px Arial"
+                canvasCtx.textAlign = "center"
+                canvasCtx.textBaseline = "top"
+                canvasCtx.fillStyle = "#01341D"
+                canvasCtx.fillText(this.human, field.w / 4, 50)
+                canvasCtx.fillText(this.computer, field.w / 4 + field.w / 2, 50)
+            }
+        }
+
+        
+        // Objeto Bola
+        const ball = {
+            x: 500,               // Propriedade x(largura) da coordenada no campo
+            y: 200,               // Propriedade y(altura) da coordenada no campo
+            r: 20,                // Propriedade do raio
+            A: 2 * Math.PI,       // Propriedade do Arco
+            S: false,             // Propriedade do Sentido anti-horario
+            draw: function () {
+                canvasCtx.fillStyle = "#ffffff"  
+                canvasCtx.beginPath()
+                canvasCtx.arc(this.x, this.y, this.r, this.A, this.S)
+                canvasCtx.fill()
+            }
+        }
+
+
+        function setup() {
+            canvasE1.width = canvasCtx.width = field.w
+            canvasE1.height = canvasCtx.height = field.h   
         };
 
+        // Função Desenho(draw) que chama todas as outras funcções
         function draw() {
-            // Desenha o campo
-            canvasCtx.fillStyle = "#286047"
-            canvasCtx.fillRect(0, 0, window.innerWidth, window.innerHeight)
-
-            // desenha a linha central
-            canvasCtx.fillStyle = "#ffffff"
-            canvasCtx.fillRect(
-                window.innerWidth/2 - lineWidth/2,
-                0,
-                lineWidth,
-                window.innerHeight
-            )
-
-            // Desenha a raquete esquerda
-            canvasCtx.fillRect(10, 300, lineWidth, 200)
-
-            // Desenha a raquete direita
-            canvasCtx.fillRect(window.innerWidth-lineWidth-10,
-            300,
-            lineWidth,
-            200)
-
-            // desnhar a bolinha
-            canvasCtx.beginPath()
-            //           ( x  , y , Raio (inicio), Arco(fim) ,  sentido ant-horario )
-            canvasCtx.arc(500,300, 20, 2 * Math.PI, false)
-            canvasCtx.fill()
-
-            // Desenhar o Placar
-            canvasCtx.font = "bold 72px Arial"
-            canvasCtx.textAlign = "center"
-            canvasCtx
-
-
+            field.draw()
+            line.draw()
+            leftPaddle.draw()
+            rigthPaddle.draw()
+            score.draw()
+            ball.draw()
         };
 
         setup();
