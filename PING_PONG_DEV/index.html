@@ -125,10 +125,28 @@
             ball.draw()
         };
 
-        setup();
-        draw();
+    
 
-        window.setInterval(draw, 1000 / 60);
+        window.animateFrame = (function() {
+            return (
+                window.requestAnimationFrame ||
+                window.webkitRequestAnationFrame ||
+                window.mozRequestAnimationFrame ||
+                window.oRequestAnimatonFrame ||
+                window.msRequestAnimationFrame ||
+                function (callback) {
+                    return window.setTimeout(callback, 10000 /60)
+                }
+            )
+        })()
+
+        function main() {
+            animateFrame(main)
+            draw()
+        }
+
+        setup();
+        main();
 
     </script>
 </body>
