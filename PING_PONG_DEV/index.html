@@ -91,12 +91,19 @@
             r: 20,                // Propriedade do raio
             A: 2 * Math.PI,       // Propriedade do Arco
             S: false,             // Propriedade do Sentido anti-horario
+            speed:5,              // Propriedade de velocidade da bola
+            _move: function() {
+                this.x += 1 * this.speed
+                this.y += 1 * this.speed
+            },
             draw: function () {
                 canvasCtx.fillStyle = "#ffffff"  
                 canvasCtx.beginPath()
                 canvasCtx.arc(this.x, this.y, this.r, this.A, this.S)
                 canvasCtx.fill()
-            }
+
+                this._move()
+            },
         }
 
 
@@ -109,14 +116,19 @@
         function draw() {
             field.draw()
             line.draw()
+
             leftPaddle.draw()
             rigthPaddle.draw()
+
             score.draw()
+
             ball.draw()
         };
 
         setup();
         draw();
+
+        window.setInterval(draw, 1000 / 60);
 
     </script>
 </body>
