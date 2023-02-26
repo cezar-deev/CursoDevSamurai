@@ -22,7 +22,8 @@
               canvasCtx = canvasE1.getContext("2d")
               gapX = 10
 
-        const lineWidth = 15;
+        const mouse = { x: 0 , y: 0 }      
+
 
         // Objeto Campo
         const field = {            
@@ -47,13 +48,19 @@
 
         // Objeto Raquete Esquerda
         const leftPaddle = {
-            x:gapX,              // Propriedade x(largura) da corrdenada no campo
-            y: 100,              // Propriedade y(altura) da corrdenada no campo
-            w:line.w,            // Propriedade Largura da rquete
-            h: 200,              // Propriedade Altura da rquete
-            draw: function () {  // Metodo que desenha a raquete
+            x:gapX,               // Propriedade x(largura) da corrdenada no campo
+            y: 0,                 // Propriedade y(altura) da corrdenada no campo
+            w:line.w,             // Propriedade Largura da rquete
+            h: 200,               // Propriedade Altura da rquete
+            _move: function () {  // Metodo que recebe dados do mouse
+                this.y = mouse.y - this.h / 2      // (this.h / 2) Coloca mouse no meio da raquete
+            },
+            draw: function () {                    // Metodo que desenha a raquete
                 canvasCtx.fillStyle = "#ffffff"
                 canvasCtx.fillRect(this.x, this.y, this.w, this.h)
+
+                this._move()
+
             }
         }
 
@@ -63,9 +70,14 @@
             y: 300,                         // Propriedade y(altura) da coordenada no campo
             w: line.w,                      // Propriedade largura da rquete
             h: 200,                         // Propriedade altura da rquete
+            _move: function () {            // Metodo que recebe dados da bolinha
+                this.y = ball.y
+            },
             draw: function () {             // Metodo que desenha a raquete
                 canvasCtx.fillStyle = "#ffffff"         
                 canvasCtx.fillRect( this.x , this.y, this.w, this.h)
+
+                this._move()
             }
         }
 
@@ -130,12 +142,12 @@
         window.animateFrame = (function() {
             return (
                 window.requestAnimationFrame ||
-                window.webkitRequestAnationFrame ||
+                window.webkitRequestAnimationFrame ||
                 window.mozRequestAnimationFrame ||
                 window.oRequestAnimatonFrame ||
                 window.msRequestAnimationFrame ||
                 function (callback) {
-                    return window.setTimeout(callback, 10000 /60)
+                    return window.setTimeout(callback, 10000 / 60)
                 }
             )
         })()
@@ -145,8 +157,16 @@
             draw()
         }
 
-        setup();
-        main();
+        setup()
+        main()
+
+        canvasE1.addEventListener("mousemove", function (e) {
+            mouse.x = e.pageX
+            mouse.y = e.pageY
+
+        })
+
+        
 
     </script>
 </body>
