@@ -98,15 +98,25 @@
         
         // Objeto Bola
         const ball = {
-            x: 500,               // Propriedade x(largura) da coordenada no campo
-            y: 200,               // Propriedade y(altura) da coordenada no campo
-            r: 20,                // Propriedade do raio
-            A: 2 * Math.PI,       // Propriedade do Arco
-            S: false,             // Propriedade do Sentido anti-horario
-            speed:5,              // Propriedade de velocidade da bola
-            _move: function() {
-                this.x += 1 * this.speed
-                this.y += 1 * this.speed
+            x: 500,                      // Propriedade x(largura) da coordenada no campo
+            y: 200,                      // Propriedade y(altura) da coordenada no campo
+            r: 20,                       // Propriedade do raio
+            A: 2 * Math.PI,              // Propriedade do Arco
+            S: false,                    // Propriedade do Sentido anti-horario
+            speed:5,                     // Propriedade de velocidade da bola
+            directionX: 1,               // Propriedade de direção X(horizontal) da bola
+            directionY: 1,               // Propriedade de direção Y(Vertical) da bola
+            _calcPosition: function() {  // Metodo da posição da bola
+                if(this.y > filed.h) {
+
+                }
+            },
+            _move: function() {          // Metodo que move a bola
+                this.x += this.directionX * this.speed
+                this.y += this.directionY * this.speed
+            },
+            _reverseY: function() {      // Metodo que reverte aa posição de Y
+                this.directionY = this.directionY * -1
             },
             draw: function () {
                 canvasCtx.fillStyle = "#ffffff"  
