@@ -98,25 +98,32 @@
         
         // Objeto Bola
         const ball = {
-            x: 500,                      // Propriedade x(largura) da coordenada no campo
-            y: 200,                      // Propriedade y(altura) da coordenada no campo
+            x: 0,                        // Propriedade x(largura) da coordenada no campo
+            y: 0,                        // Propriedade y(altura) da coordenada no campo
             r: 20,                       // Propriedade do raio
             A: 2 * Math.PI,              // Propriedade do Arco
             S: false,                    // Propriedade do Sentido anti-horario
             speed:5,                     // Propriedade de velocidade da bola
-            directionX: 1,               // Propriedade de direção X(horizontal) da bola
-            directionY: 1,               // Propriedade de direção Y(Vertical) da bola
-            _calcPosition: function() {  // Metodo da posição da bola
-                if(this.y > filed.h) {
-
+            directionX: 1,               // Propriedade de direçãoX(horizontal) da bola
+            directionY: 1,               // Propriedade de direçãoY(Vertical) da bola ( 1 pra baixo | -1 pra cima )
+            _calcPosition: function() {  // Metodo de claculo da posição da bola
+                // verifica as laterais uperiores e inferiores do campo 
+                if(
+                (this.y - this.r < 0 && this.directionY < 0) ||                 // Linha superior do campo
+                (this.y > field.h - this.r && this.directionY > 0)              // Linha inferior do campo
+                )  {
+                    this._reverseY()     // Rebate a bola invertendo o sinal do eixo Y
                 }
             },
             _move: function() {          // Metodo que move a bola
                 this.x += this.directionX * this.speed
                 this.y += this.directionY * this.speed
             },
-            _reverseY: function() {      // Metodo que reverte aa posição de Y
-                this.directionY = this.directionY * -1
+            _reverseX: function () {     // Metodo que reverte de posição de X
+                this.directionX *= -1    // (1 * -1) = -1  e  (-1 * -1) = 1   
+            },
+            _reverseY: function() {      // Metodo que reverte de posição de Y
+                this.directionY *= -1    // (1 * -1) = -1  e  (-1 * -1) = 1
             },
             draw: function () {
                 canvasCtx.fillStyle = "#ffffff"  
@@ -124,6 +131,7 @@
                 canvasCtx.arc(this.x, this.y, this.r, this.A, this.S)
                 canvasCtx.fill()
 
+                this._calcPosition()
                 this._move()
             },
         }
@@ -175,8 +183,6 @@
             mouse.y = e.pageY
 
         })
-
-        
 
     </script>
 </body>
