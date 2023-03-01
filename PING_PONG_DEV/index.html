@@ -69,9 +69,17 @@
             x: field.w - line.w - gapX,     // Propriedade x(largura) da coordenada no campo
             y: 300,                         // Propriedade y(altura) da coordenada no campo
             w: line.w,                      // Propriedade largura da rquete
-            h: 200,                         // Propriedade altura da rquete
+            h: 200,
+            speed: 5,                        // Propriedade altura da rquete
             _move: function () {            // Metodo que recebe dados da bolinha
-                this.y = ball.y
+                if (this.y + this.h / 2 < ball.y + ball.r) {
+                    this.y += this.speed
+                } else {
+                    this.y -= this.speed 
+                }        
+            },
+            speedUp: function() {
+                this.speed += 2
             },
             draw: function () {             // Metodo que desenha a raquete
                 canvasCtx.fillStyle = "#ffffff"         
@@ -84,7 +92,13 @@
         // Objeto Placar 
         const score = {
             human: 1,   
-            computer: 3,    
+            computer: 2,
+            increaseHuman: function() {
+                this.human++
+            },
+            increaseComputer: function () {
+                this.computer++
+            },    
             draw: function () {
                 canvasCtx.font = "bold 72px Arial"
                 canvasCtx.textAlign = "center"
@@ -106,7 +120,39 @@
             speed:5,                     // Propriedade de velocidade da bola
             directionX: 1,               // Propriedade de direçãoX(horizontal) da bola
             directionY: 1,               // Propriedade de direçãoY(Vertical) da bola ( 1 pra baixo | -1 pra cima )
-            _calcPosition: function() {  // Metodo de claculo da posição da bola
+
+            // Metodo de claculo da posição da bola
+            _calcPosition: function() {  
+                // verifica se o jogador 1 fez um ponto (x > largura do campo)
+                if (this.x > field.w -this.r - rigthPaddle.w - gapX) {
+                    // verifica se a raquete direita  está na posição y da Bola
+                    if(this.y + this.r > rigthPaddle.y &&               // parte superior
+                       this.y - this.r < rigthPaddle.y + rigthPaddle.h  // parte inferior
+                    ) {
+                       // rebate a bola invertendo o sinal de x
+                       this._reverseX()
+                    } else {
+                       //pontuar o jogador 1
+                       score.increaseHuman()
+                       this._pointUp()
+                    }
+                }  
+                
+                // verifica se o jogador 1 fez um ponto (x < 0)
+                if(this.x < this.r + leftPaddle.w + gapX) {
+                    // verifica se a raquete esquerda esta na posição y da bola
+                    if(this.y + this.r > leftPaddle.y &&
+                       this.y - this.r < leftPaddle.y + leftPaddle.h ){
+                       // rebate a bola invertendo o sinal de x
+                       this._reverseX()
+                    } else {
+                       //pontuar o jogador 2
+                       score.increaseComputer()
+                       this._pointUp()
+                    }
+                }
+
+
                 // verifica as laterais uperiores e inferiores do campo 
                 if(
                 (this.y - this.r < 0 && this.directionY < 0) ||                 // Linha superior do campo
@@ -115,15 +161,25 @@
                     this._reverseY()     // Rebate a bola invertendo o sinal do eixo Y
                 }
             },
-            _move: function() {          // Metodo que move a bola
-                this.x += this.directionX * this.speed
-                this.y += this.directionY * this.speed
-            },
             _reverseX: function () {     // Metodo que reverte de posição de X
                 this.directionX *= -1    // (1 * -1) = -1  e  (-1 * -1) = 1   
             },
             _reverseY: function() {      // Metodo que reverte de posição de Y
                 this.directionY *= -1    // (1 * -1) = -1  e  (-1 * -1) = 1
+            },
+            _SpeedUp: function () {
+                this.speed += 1
+            },
+            _pointUp: function () {
+                this._SpeedUp()
+                rigthPaddle.speedUp()
+
+                this.x = field.w / 2
+                this.y = filed.h / 2
+            },
+            _move: function () {          // Metodo que move a bola
+                this.x += this.directionX * this.speed
+                this.y += this.directionY * this.speed
             },
             draw: function () {
                 canvasCtx.fillStyle = "#ffffff"  
@@ -135,7 +191,6 @@
                 this._move()
             },
         }
-
 
         function setup() {
             canvasE1.width = canvasCtx.width = field.w
