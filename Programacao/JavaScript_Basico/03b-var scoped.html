@@ -1,0 +1,21 @@
+<html>
+<script>
+    // Escopo pode ser : um estrutura de if, repetição ou função
+    // Com VAR : É equivalente a uma variavel Global ( pode ser modificado em qualuer escopo )
+    // 
+    var x = 10  // Esta em escopo Global
+    console.log("x", x)
+
+    { // Em um escopo local qualquer
+        console.log("x", x)
+        x = 20 
+
+        var y = 30
+    }
+
+    console.log("x", x)
+    console.log("y", y)
+
+</script>
+
+</html>
