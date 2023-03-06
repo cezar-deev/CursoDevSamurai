@@ -1,0 +1,34 @@
+<html>
+<script>
+    // Contenar : A + B = AB
+    let name = "cezar", age = 40, address = "niteroi"
+
+    address = {
+        street :"rua 12",
+        city :"Niterói"
+    }
+
+    console.log("name", name)
+    console.log("age", age)
+
+    // concatenação - forma antiga
+    console.log(name + " tem " + age + " anos") 
+
+    // concatenação - forma antiga ( um objeto )
+    console.log(name + " tem " + age + " anos. E reside em " + JSON.stringify(address)) 
+
+
+
+
+    // Interpolação - forma Nova
+    console.log(`${name} tem ${age} anos`)
+
+    // Interpolação - forma Nova ( posso usar funções )
+    console.log(`${name} tem ${age + 1} anos`)
+
+    // Interpolação - forma Nova ( com um objeto )
+    console.log(`${name} tem ${age + 1} anos e reside em ${JSON.stringify(address) }`)
+
+</script>
+
+</html>

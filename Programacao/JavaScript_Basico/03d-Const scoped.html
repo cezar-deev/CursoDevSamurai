@@ -1,0 +1,23 @@
+<html>
+<script>
+    // Const ( Constantes ) = Não poderá ser modificado seu valor inicial
+    // Const ( Constantes ) = Tem o comportamento parceido com o Let em relação ao escopo
+    // Const ( Constantes ) = precisa sempre atribuir uma valor, para iniciar;
+
+    // 
+    const x = 10  // Esta em escopo Global
+    console.log("x", x)
+
+    { // Em um escopo local qualquer
+        console.log("x", x)
+        x = 20
+
+        const y = 30
+    }
+
+    console.log("x", x)
+    console.log("y", y)
+
+</script>
+
+</html>
