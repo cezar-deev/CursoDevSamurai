@@ -27,8 +27,19 @@
 
         // Arrays com um Estrutura complexa
         const persons2 = [
-          {}   
+          {name: "Alicia", ager:10},
+          {name: "Celine", ager: 16 },
+          {name: "Aline", ager: 40 },
+          {name: "Cezar", ager: 41 },      
         ]
+
+        // Arrays com um Estrutura mista ( complexa com Mista), mas nao é uma boa pratica
+            const persons3 = [
+                { name: "Aline", ager: 40 },
+                { name: "Cezar", ager: 41 },
+                "Zé",
+                "Roberto",
+            ]
 
         // Acessando os dados
         console.log(persons)
@@ -46,6 +57,12 @@
         //Contar a quantidade de elementos dentro da arrays
         console.log(persons.length)
 
+
+        console.log(persons2)
+        console.log(persons2[0])
+        console.log(persons2[1])
+        console.log(persons2[2])
+        console.log(persons2[3])
 
 
     </script>
