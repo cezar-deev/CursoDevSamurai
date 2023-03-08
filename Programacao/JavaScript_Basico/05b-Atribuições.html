@@ -9,26 +9,40 @@
 <body>
     <script>
         // Contadores ou Acumuladores...
-        // Num = Num + 1
+        //num++ / num-- : (Com incremento a direita, é retornado primeiro o valor da variavel depois é incrementado)
+        //++num / --num : ()
 
-        // fazem a mesma coisa ( adicção )
+        // "Usando os incrementos num++ / num--"
         let num1 = 0
-        num1 =  num1 + 1
-        num1++
-        console.log(num1)
+        console.log("Usando os incrementos num++ / num--")
+        console.log("num1 incial:", num1)
+        num1 = num1 + 1  // 0+1 
+        console.log("num1 incremento normal:", num1)
+        num1++ // 1+1  (faz o mesmo que o de cima)
+        console.log("num1 incremento com ++ :", num1)
+        num1-- // 2-1  (faz o mesmo que o de cima,porem subtraindo)
+        console.log("num1 decremento com -- :", num1)
 
-        // fazem a mesma coisa ( subtração )
-        let num2 = 0
-        num2 = num2 - 1
-        num2--
-        console.log(num2)
+        //explicando as atribuições
+         let num2 = 0
+            console.log("explicando as atribuições num++ / num--")
+            console.log("num2", num2++) // 0+1 retorna = 0 : Retonar o valor da variavel, só depois atribui (++);
+            console.log("num2", num2++) // 1+1 retorna = 1 : Retonar o valor da variavel, só depois atribui (++);
+            console.log("num2", num2++) // 1+1 retorna = 2 : Retonar o valor da variavel, só depois atribui (++);
+            console.log("num2", num2++) // 1+1 retorna = 3 : Retonar o valor da variavel, só depois atribui (++);
+            console.log("num2", num2++) // 1+1 retorna = 4 : Retonar o valor da variavel, só depois atribui (++);
+            console.log("num2", num2++) // 1+1 retorna = 5 : Retonar o valor da variavel, só depois atribui (++);
 
-        // Tem diferença dos 2 acima
+
+        // "Usando os incrementos ++num / --num"
         let num3 = 0
-        ++num3
-        --num3
-
-        console.log("num" + num)
+            console.log("explicando as atribuições ++num / num--")
+            console.log("num2", ++num3) // 0+1 retorna = 1 : Atribui primeiro(++),logo depois mostra o resultado da varivale;
+            console.log("num2", ++num3) // 0+1 retorna = 2 : Atribui primeiro(++),logo depois mostra o resultado da varivale;
+            console.log("num2", ++num3) // 0+1 retorna = 3 : Atribui primeiro(++),logo depois mostra o resultado da varivale;
+            console.log("num2", ++num3) // 0+1 retorna = 4 : Atribui primeiro(++),logo depois mostra o resultado da varivale;
+            console.log("num2", ++num3) // 0+1 retorna = 5 : Atribui primeiro(++),logo depois mostra o resultado da varivale;
+            console.log("num2", ++num3) // 0+1 retorna = 6 : Atribui primeiro(++),logo depois mostra o resultado da varivale;
 
     </script>
 </body>
